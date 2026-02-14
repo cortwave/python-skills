@@ -77,6 +77,8 @@ class UserConfig:
 **Don't use:** `dataclasses.dataclass`, `TypedDict`, or raw dicts for structured data.
 **Exception:** Simple return values (tuples, primitives) don't need Pydantic.
 
+**Don't use `from __future__ import annotations`** in files that define Pydantic models. Pydantic evaluates annotations at runtime; `__future__` annotations make them strings, which breaks `model_rebuild()` and tricks ruff TCH rules into moving runtime-required imports into `TYPE_CHECKING` blocks.
+
 ## Verification: After Every Subtask
 
 After completing each logical unit of work (function, class, module, test file), run checkers only on the files you changed in that subtask:
